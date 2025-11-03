@@ -10,7 +10,7 @@ from src.exception import CustomException
 class DataIngestionConfig:
     train_data_path = os.path.join('artifacts', 'train.csv')
     test_data_path = os.path.join('artifacts', 'test.csv')
-    raw_data_path = os.path.join('artifacts', 'data.csv')
+    raw_data_path = os.path.join('artifacts', 'mental_health_cleaned.xlsx')
 
 class DataIngestion:
     
@@ -20,7 +20,7 @@ class DataIngestion:
     def initiate_data_ingestion(self):
         logging.info("Entered the data ingestion method")
         try:
-            mental_health_survey_df = pd.read_excel("ChiEAC CARES Survey.xlsx")
+            mental_health_survey_df = pd.read_excel("Cleaned Data/mental_health_df.xlsx")
             logging.info('Read the Excel Data')
 
             # Save raw data
