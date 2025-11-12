@@ -10,7 +10,7 @@ from src.utils import save_object, evaluate_models
 
 @dataclass
 class ModelTrainerConfig:
-    trained_model_file = os.path.join('artificats','model.pkl')
+    trained_model_file = os.path.join('artifacts','model.pkl')
 
 class Model_Trainer:
     def __init__ (self, ModelTrainerConfig):
@@ -56,9 +56,9 @@ class Model_Trainer:
             models=models, params=params
             )
 
-            # Best Model Selection and Score
-            best_model_name = max(model_report, key=model_report.get)
-            best_model_score = model_report[best_model_name]
+            # Best Model Selection and Score based of F1
+            best_model_name = max(model_report, key= lambda x: model_report[x]['test_f1_score'])
+            best_model_score = model_report[best_model_name]['test_f1_score']
             best_model = models[best_model_name]
 
             # Save best model
