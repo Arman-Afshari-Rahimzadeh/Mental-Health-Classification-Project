@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stress Risk Indicator</title>
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Background gradient */
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #a8edea, #fed6e3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Form container */
+    .login {
+      background-color: #ffffffcc; /* slightly transparent white */
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 400px;
+      padding: 30px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: #555;
+      margin-bottom: 25px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #444;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="number"], select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    input[type="number"]:focus, select:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    }
+
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    .mb-3 {
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="login">
+    <h1>Stress Risk Indicator</h1>
+
+    <form action="{{ url_for('predict_datapoint')}}" method="post">
+      <h2>Stress Risk Prediction</h2>
+
+      <!-- Birth Year -->
+      <div class="mb-3">
+        <label for="birth_year" class="form-label">Birth Year</label>
+        <input type="number" id="birth_year" name="birth_year" placeholder="Enter Birth Year" required>
+      </div>
+
+      <!-- Potential Therapy -->
+      <div class="mb-3">
+        <label for="potential_therapy" class="form-label">Potential Therapy Level</label>
+        <select id="potential_therapy" name="potential_therapy" required>
+          <option value="" selected disabled>Select Potential Level</option>
+          {% for i in range(1, 11) %}
+          <option value="{{ i }}">{{ i }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Employment Status -->
+      <div class="mb-3">
+        <label for="employment_status" class="form-label">Employment Status</label>
+        <select id="employment_status" name="employment_status" required>
+          <option value="" selected disabled>Select Employment Status</option>
+          <option value="Student and Employed">Student and Employed</option>
+          <option value="Student">Student</option>
+          <option value="Employed">Employed</option>
+          <option value="Unemployed">Unemployed</option>
+          <option value="Self-employed">Self-employed</option>
+        </select>
+      </div>
+
+      <!-- Submit -->
+      <div class="mb-3" style="text-align:center;">
+        <button type="submit">Predict Stress Category</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
